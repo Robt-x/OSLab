@@ -23,6 +23,7 @@ typedef struct TreeLine{
   int cur;
 } Line;
 Line t;
+
 void putThread(int id){
 	int PPid, Pid, len, cur;	
 	char path[50];
@@ -106,27 +107,6 @@ void printTree(int Pid){
 					dis++;
                                 }
 			}
-			/*
-			if(pp->child[0] == p->Pid){
-				if(pp->visit){
-					memset(blank, ' ', sizeof(char)*30);
-                                        blank[strlen(pp->Name)] = '\0';
-                                        if(pp->top == 1)
-						asprintf(&pad1, "%s   ", blank);
-					else
-						asprintf(&pad1, "%s │ ", blank);
-				}else{
-					pp->visit = 1;
-                                        asprintf(&pad1, "%s─┬─", pp->Name);
-				}
-			}else{
-				memset(blank, ' ', sizeof(char)*30);
-				blank[strlen(pp->Name)] = '\0';
-				if(pp->child[pp->top-1] == p->Pid)
-					asprintf(&pad1, "%s └─", blank);
-				else
-					asprintf(&pad1, "%s ├─", blank);
-			}*/
 			t.blocks[t.cur++] = pad1;
 			p = pp;
 		}
@@ -155,15 +135,6 @@ int main(){
 		if(ch >= '0' && ch <= '9' && ptrmap[id] == NOPE)
 			putThread(id);
 	}
-	/*
-	for(int i=0; i<50000; i++){
-		if(ptrmap[i] != NOPE){
-			TNode *p = ptrmap[i];
-			if(!strcmp(p->Name, "ssh-agent"))
-				printf("%d\n", p->Pid);
-		}
-	}
-	*/
 	printTree(1);
 	for(int i=0; i<50000; i++){
 		if(ptrmap[i] != NOPE)
